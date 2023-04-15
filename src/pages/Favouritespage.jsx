@@ -2,6 +2,7 @@ import React from 'react'
 import { useContext } from 'react'
 import globalContext from '../context/GlobalState'
 import ItemCard from '../components/ItemCard'
+import {GiPopcorn} from 'react-icons/gi'
 
 
 function Favouritespage() {
@@ -12,9 +13,14 @@ function Favouritespage() {
         Favourites
       </h1>
       <div className='p-6 px-24 flex flex-row justify-center content-center gap-7 flex-wrap '>
-      {favourite.map(item=>{
+      {favourite.length>0 ? favourite.map(item=>{
        return <ItemCard item={item} />
-      })}
+      }):<>
+      <h2 className='text-3xl text-white flex justify-center items-end gap-3'>
+        No favourites yet? 
+        <GiPopcorn size='1.3em' />
+        </h2>
+        </>}
     </div>
     </div>
   )

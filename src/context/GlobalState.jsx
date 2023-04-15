@@ -28,6 +28,13 @@ export const GlobalProvider =({children})=>{
     console.log(item)
     setFavourite([...favourite,item])
 }
+
+const removeFromFav = (item)=>{
+  console.log(item)
+  setFavourite(()=>{
+    return favourite.filter((show)=>show.id!==item.id)
+  })
+}
 // search for movies & TV shows
   const searchMedia=async(query)=>{
     const response = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${import.meta.env.VITE_TMDB_API_KEY}&query=${query}`)
@@ -37,7 +44,7 @@ export const GlobalProvider =({children})=>{
 
     return(
         <globalContext.Provider
-        value={{addToFav,data,setdata,searchMedia,favourite}}>
+        value={{addToFav,data,setdata,searchMedia,favourite,removeFromFav}}>
         {children}
     </globalContext.Provider>
     )

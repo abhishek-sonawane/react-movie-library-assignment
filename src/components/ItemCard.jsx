@@ -1,18 +1,27 @@
 import React, { useContext, useState } from "react";
 import globalContext from "../context/GlobalState";
 import placeholder from "../assets/images/placeholder-1-600x379.png";
+import {VscHeart, VscHeartFilled} from 'react-icons/vsc'
+import {AiOutlineHeart,AiFillHeart} from 'react-icons/ai'
 
 function ItemCard({ item }) {
-  const { addToFav, favourite } = useContext(globalContext);
+  const { addToFav, favourite,removeFromFav } = useContext(globalContext);
+
 
   const validateAndGetYear = (date) => {
     return typeof date == "string" ? date.slice(0, 4) : date;
   };
+
   // const checkMediaInList =(sourceItem)=>{
   // return  favourite.some(item=> sourceItem.id==item.id)
   // }
   let checkAvailable = favourite.find((srcitem) => srcitem.id === item.id);
   let val = checkAvailable ? true : false;
+
+
+  const favouriteHandler =(item)=>{
+    val? removeFromFav(item) : addToFav(item)
+  }
   return (
     <div className="w-full relative max-w-2xl md:max-w-[18rem] text-white flex flex-col rounded-2xl overflow-hidden">
       <div>
@@ -34,7 +43,7 @@ function ItemCard({ item }) {
         </p>
       </div>
 
-      <button   disabled={val}  className={` absolute w-fit py-2 px-4 rounded-md cursor-pointer disabled:cursor-not-allowed  ${val? ' bg-slate-400' : 'bg-blue-700'} ` }  onClick={()=>addToFav(item)} >add to favourites</button>
+      <button  className={` text-md absolute w-fit py-2 px-4 right-3 bottom-3 rounded-md cursor-pointer disabled:cursor-not-allowed` }  onClick={()=>favouriteHandler(item)} >{val?<AiFillHeart/> : <AiOutlineHeart/>}</button>
     </div>
   );
 }
