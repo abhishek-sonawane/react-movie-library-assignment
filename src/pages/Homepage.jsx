@@ -23,7 +23,7 @@ const {data} = useContext(globalContext)
    <div className='p-6 px-24 flex flex-row justify-center content-center gap-7 flex-wrap '>
    {data.results?data.results.map(item=>{
        return <ItemCard item={item} />
-    }):<>loading...</>}
+    }):<h1 className='text-xl text-white'>loading...</h1>}
    </div>
     </div>
   )
